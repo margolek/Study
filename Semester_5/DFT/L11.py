@@ -35,9 +35,8 @@ def Z2(w3,n):
 	#Krok 3
 	G0_num,G0_den = 1,1
 	for k in range(0,n):
-		print(k)
-		G0_num = G0_num*(-poles[k]) #*(-poles[1])*(-poles[2])
-		G0_den = G0_den*(2-poles[k]) #*(2-poles[1])*(2-poles[2])
+		G0_num = G0_num*(-poles[k]) 
+		G0_den = G0_den*(2-poles[k]) 
 	G0 = G0_num/G0_den
 	poles_digital = (2+poles)/(2-poles)
 	for n in poles_digital:
