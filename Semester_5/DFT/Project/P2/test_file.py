@@ -1,6 +1,6 @@
 import numpy as np
+import matplotlib.pyplot as plt
 
-with open('lena256.pgm', 'r') as infile:
-    header = infile.readline()
-    width, height, maxval = [int(item) for item in header.split()[1:]]
-    image = np.fromfile(infile, dtype=np.uint16).reshape((height, width))
+arr1 = np.array([1,1,1,2,3,4,5,5,5,5,5])
+plt.hist(arr1)
+plt.show()

@@ -83,6 +83,19 @@ def plot_profit(y1,y2,y3):
     plt.stem(x,[y1,y2,y3])
     plt.show()
 
+def quantization(x):
+    MSE = np.array([])
+    q = np.arange(1,33)
+    for i in q:
+        xq = i*np.round(x/i)
+        MSE = np.append(MSE, np.sum((x-xq)**2)/len(x))
+    PSNR = 10*np.log10(255**2/MSE)
+    plt.figure(4)
+    plt.grid(True)
+    plt.xlabel('Stopień kwantyzacji')
+    plt.ylabel('PSNR')
+    plt.plot(q,PSNR)
+    plt.show()
 
 if __name__ == "__main__":
     image = read_pgm("lena256.pgm", byteorder='<')
@@ -94,7 +107,7 @@ if __name__ == "__main__":
     new_image = image.flatten('F') - np.mean(image.flatten('F'))
 
     autocorelation = autocorr(new_image)
-    
+
     variance = variance(new_image)
     print(variance)
 
@@ -113,6 +126,9 @@ if __name__ == "__main__":
     dpcm_profit_coef_33 = dpcm_profit_2(dpcm_profit_coef_3, new_image)
 
     plot_profit = plot_profit(dpcm_profit_coef_11,dpcm_profit_coef_22,dpcm_profit_coef_33)
+
+    img_quant = quantization(new_image)
+    print(img_quant)
     
 
 
