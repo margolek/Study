@@ -85,10 +85,24 @@ def plot_profit(y1,y2,y3):
 
 def quantization(x):
     MSE = np.array([])
+    d = np.array([])
+    probability = np.array([])
+    H = np.array([])
     q = np.arange(1,33)
     for i in q:
         xq = i*np.round(x/i)
         MSE = np.append(MSE, np.sum((x-xq)**2)/len(x))
+        for j in range(1,len(x)):
+            d = np.append(d,xq[j]-xq[j-1])
+        a = np.histogram(d)
+        for j in a[0]:  
+            probability = np.append(probability,j/(np.sum(a[0])))
+        #H = np.append(H, -np.sum(probability*np.log2(probability)))
+    print(H)
+    plt.figure(5)
+    plt.grid(True)
+    plt.hist(d)
+    plt.show()
     PSNR = 10*np.log10(255**2/MSE)
     plt.figure(4)
     plt.grid(True)
@@ -96,6 +110,8 @@ def quantization(x):
     plt.ylabel('PSNR')
     plt.plot(q,PSNR)
     plt.show()
+
+    
 
 if __name__ == "__main__":
     image = read_pgm("lena256.pgm", byteorder='<')
@@ -114,7 +130,7 @@ if __name__ == "__main__":
     variance_diff = variance_diff(new_image)
     print(variance_diff)
 
-    dpcm_profit = dpcm_profit(new_image)
+    dpcm_profit = dpcm_profit(new_image) 
     print(dpcm_profit)
 
     dpcm_profit_coef_1 = define_coef(autocorelation,1)
