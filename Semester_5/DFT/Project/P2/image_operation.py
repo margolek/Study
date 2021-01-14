@@ -22,8 +22,10 @@ def autocorr(x):
     plt.figure(2)
     plt.grid(True)
     plt.title("Funkcja autokorelacji")
-    plt.acorr(x, maxlags=30,normed=True)
+    output_data = plt.acorr(x, maxlags=30,normed=True)
+    auto_coef = output_data[1][30:]
     plt.show()
+    return auto_coef
 def variance(x):
     return 'Wariancja sygnału wynosi: {0:4e}'.format(np.var(x))
 
@@ -39,25 +41,29 @@ def dpcm_profit(x):
     Gdpcm = sum_x/sum_d
     return 'Zysk z kodowania DPCM wynosi: {0:0.3f}'.format(Gdpcm)
 
-def dpcm_profit_with_coef(x):
-    A = np.zeros((3,len(x)))
-    pass
+def dpcm_profit_with_coef(x,auto):
+    a = np.array([[auto[0],auto[1],auto[2]], [auto[1],auto[0],auto[1]],[auto[2],auto[3],auto[0]]])
+    b = np.array([[auto[1]],[auto[2]],[auto[3]]])
+    return np.linalg.solve(a,b)
 
 
 if __name__ == "__main__":
     image = read_pgm("lena256.pgm", byteorder='<')
+    image = np.array(image)
+    print(image)
     plt.figure(1)
     plt.imshow(image, plt.cm.gray)
-    #plt.show()
+    plt.show()
     new_image = image.flatten() - np.mean(image.flatten())
     autocorelation = autocorr(new_image)
     variance = variance(new_image)
-    #print(variance)
+    print(variance)
     variance_diff = variance_diff(new_image)
-    #print(variance_diff)
+    print(variance_diff)
     dpcm_profit = dpcm_profit(new_image)
-    #print(dpcm_profit)
-    dpcm_profit = dpcm_profit_with_coef(new_image)
+    print(dpcm_profit)
+    dpcm_profit = dpcm_profit_with_coef(new_image,autocorelation)
+    print(dpcm_profit)
 
 
     
