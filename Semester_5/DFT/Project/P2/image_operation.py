@@ -113,34 +113,34 @@ def quantization(x):
 if __name__ == "__main__":
     image = read_pgm("lena256.pgm", byteorder='<')
     image = np.array(image)
-    #plt.figure(1)
-    #plt.imshow(image, plt.cm.gray)
-    #plt.show()
+    plt.figure(1)
+    plt.imshow(image, plt.cm.gray)
+    plt.show()
 
     new_image = image.flatten('F') - np.mean(image.flatten('F'))
 
-    #autocorelation = autocorr(new_image)
+    autocorelation = autocorr(new_image)
 
-    #variance = variance(new_image)
-    #print(variance)
+    variance = variance(new_image)
+    print(variance)
 
-    #variance_diff = variance_diff(new_image)
-    #print(variance_diff)
+    variance_diff = variance_diff(new_image)
+    print(variance_diff)
 
-    #dpcm_profit = dpcm_profit(new_image) 
-   # print(dpcm_profit)
+    dpcm_profit = dpcm_profit(new_image) 
+    print(dpcm_profit)
 
-   # dpcm_profit_coef_1 = define_coef(autocorelation,1)
-   # dpcm_profit_coef_2 = define_coef(autocorelation,2)
-   # dpcm_profit_coef_3 = define_coef(autocorelation,3)
+    dpcm_profit_coef_1 = define_coef(autocorelation,1)
+    dpcm_profit_coef_2 = define_coef(autocorelation,2)
+    dpcm_profit_coef_3 = define_coef(autocorelation,3)
     
-    #dpcm_profit_coef_11 = dpcm_profit_2(dpcm_profit_coef_1, new_image)
-   # dpcm_profit_coef_22 = dpcm_profit_2(dpcm_profit_coef_2, new_image)
-    #dpcm_profit_coef_33 = dpcm_profit_2(dpcm_profit_coef_3, new_image)
+    dpcm_profit_coef_11 = dpcm_profit_2(dpcm_profit_coef_1, new_image)
+    dpcm_profit_coef_22 = dpcm_profit_2(dpcm_profit_coef_2, new_image)
+    dpcm_profit_coef_33 = dpcm_profit_2(dpcm_profit_coef_3, new_image)
 
-    #plot_profit = plot_profit(dpcm_profit_coef_11,dpcm_profit_coef_22,dpcm_profit_coef_33)
+    plot_profit = plot_profit(dpcm_profit_coef_11,dpcm_profit_coef_22,dpcm_profit_coef_33)
 
-    img_quant = quantization(new_image)
+    #img_quant = quantization(new_image)
     
 
 
