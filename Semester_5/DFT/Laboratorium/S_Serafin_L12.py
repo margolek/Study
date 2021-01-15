@@ -68,7 +68,52 @@ def Z3():
 	plt.show()
 
 def Z4():
+	duration = 250
+	fs = 1000
+	samples = int(fs*duration)
+	t = np.arange(samples) / fs
+	signal = 2*np.sin(2*np.pi*0.1*t)
+	signal_1 = np.sin(2*np.pi*0.005*t)
+	signal_2 = np.sin(2*np.pi*0.1*t)
+	signal_modulated = (1+signal_1)*signal_2
+	analytic_signal_modulated = hilbert(signal_modulated)
+	amp_demod = np.abs(analytic_signal_modulated)
+	plt.figure(5)
+	plt.grid(True)
+	plt.title('Sygnał zmodulowany amplitudowo')
+	plt.plot(t,signal_modulated)
+	plt.plot(t,signal,linewidth=0.5)
+	plt.show()
+
+	plt.figure(6)
+	plt.plot(t,np.real(analytic_signal_modulated),label='Real part')
+	plt.plot(t,np.imag(analytic_signal_modulated),label='Imaginary part')
+	plt.title('Część rzeczywista i urojona sygnału analitycznego')
+	plt.grid(True)
+	plt.legend()
+	plt.show()
+
+	plt.figure(7)
+	plt.plot(t,amp_demod)
+	plt.grid(True)
+	plt.title('Sygnał po demodulacji')
+	plt.show()
+	return signal_1
+
+def Z5():
+	"""
+	W tym punkcie nie wiedziałem jak dokładnie dobrać sygnały
+	x(n) oraz y(n). Probowałem wybrać je w taki sposób, żeby 
+	A(n) oraz B(n) miały modulowaną amplitudę, jednak uzyskane 
+	wyniki nie były zadowalające
+	"""
+	pass
 	
-hn = Z1(15)
-ampl_pha = Z2(hn,15)
-Z3()
+
+
+if __name__ == '__main__':
+	hn = Z1(15)
+	ampl_pha = Z2(hn,15)
+	Z3()
+	signal = Z4()
+	phase_modulation = Z5()
