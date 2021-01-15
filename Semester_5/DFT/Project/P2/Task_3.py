@@ -18,7 +18,10 @@ def read_pgm(filename, byteorder='>'):
                             offset=len(header)
                             ).reshape((int(height), int(width)))
 
-
+def create_rxx(coef):
+    diagonal= np.ones(32)
+    rxx = np.diag(diagonal,k=0)
+    print(rxx)
 
 
 if __name__ == "__main__":
@@ -32,4 +35,4 @@ if __name__ == "__main__":
 
     output_data = plt.acorr(new_image, maxlags=30,normed=True)
     auto_coef = output_data[1][30:]
-    print(auto_coef)
+    Rxx = create_rxx(auto_coef)
