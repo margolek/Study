@@ -112,8 +112,8 @@ def Z5():
 
 
 if __name__ == '__main__':
-	hn = Z1(15)
-	ampl_pha = Z2(hn,15)
-	Z3()
+	#hn = Z1(15)
+	#ampl_pha = Z2(hn,15)
+	#Z3()
 	signal = Z4()
-	phase_modulation = Z5()
+	#phase_modulation = Z5()

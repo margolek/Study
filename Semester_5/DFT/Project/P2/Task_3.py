@@ -1,5 +1,6 @@
 import re
 import numpy as np
+from scipy import signal
 import matplotlib.pyplot as plt
 def read_pgm(filename, byteorder='>'):
     with open(filename, 'rb') as f:
@@ -18,10 +19,19 @@ def read_pgm(filename, byteorder='>'):
                             offset=len(header)
                             ).reshape((int(height), int(width)))
 
-def create_rxx(coef):
-    diagonal= np.ones(32)
-    rxx = np.diag(diagonal,k=0)
-    print(rxx)
+def create_rxx(coef,array_size):
+    """
+    Wyznaczyć funkcję autokorelacji sygnału 'lena256.pgm'; i zbudować macierz Rxx
+    """
+    Rxx = np.zeros((array_size,array_size))
+    rowidx_triu, colidx_triu = np.triu_indices(array_size)
+    rowidx_tril, colidx_tril = np.tril_indices(array_size)
+    for n in np.arange(0,16*array_size):
+        Rxx[rowidx_triu, colidx_triu] = coef[(colidx_triu-rowidx_triu)]
+    for n in np.arange(0,16*array_size):
+        Rxx[rowidx_tril, colidx_tril] = coef[(colidx_tril-rowidx_tril)]
+    
+    return Rxx
 
 
 if __name__ == "__main__":
@@ -35,4 +45,4 @@ if __name__ == "__main__":
 
     output_data = plt.acorr(new_image, maxlags=30,normed=True)
     auto_coef = output_data[1][30:]
-    Rxx = create_rxx(auto_coef)
+    Rxx = create_rxx(auto_coef,30)
