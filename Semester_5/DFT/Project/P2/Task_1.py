@@ -95,7 +95,7 @@ def quantization(x):
             d = np.append(d,xq[j]-xq[j-1])
         a = np.histogram(d)
         probability = a[0]/(np.sum(a[0]))
-        H = np.append(H, -np.sum(probability * np.log(probability)))
+        H = np.append(H, -np.sum(probability *
     print(H)
             
 
