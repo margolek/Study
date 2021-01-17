@@ -25,7 +25,7 @@ def autocorr(x):
     plt.title("Funkcja autokorelacji")
     output_data = plt.acorr(x, maxlags=30,normed=True)
     auto_coef = output_data[1][30:]
-    #plt.show()
+    plt.show()
     return auto_coef
 def variance(x):
     return 'Wariancja sygnału wynosi: {0:4e}'.format(np.var(x))
@@ -84,19 +84,27 @@ def plot_profit(y1,y2,y3):
     plt.show()
 
 def quantization(x):
+    """
+    W tym punkcie nie zgadza mi się wartość entropi, która
+    przybiera wartości niemotoniczne i nie mogę się zorientować
+    co może być tego problemem. Otrzymany historam również mi się
+    niestety nie pokrywa.
+    """
+
     MSE = np.array([])
-    d = np.array([])
     H = np.array([])
     q = np.arange(1,33)
     for i in q:
         xq = i*np.round(x/i)
         MSE = np.append(MSE, np.sum((x-xq)**2)/len(x))
-        for j in range(1,len(x)):
-            d = np.append(d,xq[j]-xq[j-1])
+        d = np.array([])     
+        for i in np.arange(1,len(x)):
+            d = np.append(d,xq[i]-xq[i-1])
         a = np.histogram(d)
-        probability = a[0]/(np.sum(a[0]))
-        H = np.append(H, -np.sum(probability *
-    print(H)
+        probability = (a[0])/(np.sum(a[0]))
+        H = np.append(H, -np.sum(probability * np.log2(probability)))
+
+    plt.hist(d)
             
 
 
@@ -106,6 +114,13 @@ def quantization(x):
     plt.xlabel('Stopień kwantyzacji')
     plt.ylabel('PSNR')
     plt.plot(q,PSNR)
+    plt.show()
+
+    plt.figure(7)
+    plt.grid(True)
+    plt.xlabel('Stopień kwantyzacji')
+    plt.ylabel('Entropia')
+    plt.plot(q,H)
     plt.show()
 
     
@@ -131,12 +146,18 @@ if __name__ == "__main__":
     print(dpcm_profit)
 
     dpcm_profit_coef_1 = define_coef(autocorelation,1)
+    print('W przypadku 1 współczynnika otrzymujemy:{}'.format(dpcm_profit_coef_1))
     dpcm_profit_coef_2 = define_coef(autocorelation,2)
+    print('W przypadku 2 współczynników otrzymujemy:{}'.format(dpcm_profit_coef_2))
     dpcm_profit_coef_3 = define_coef(autocorelation,3)
+    print('W przypadku 3 współczynników otrzymujemy:{}'.format(dpcm_profit_coef_3))
     
     dpcm_profit_coef_11 = dpcm_profit_2(dpcm_profit_coef_1, new_image)
+    print('W przypadku 1 współczynnika otrzymujemy:{}'.format(dpcm_profit_coef_11))
     dpcm_profit_coef_22 = dpcm_profit_2(dpcm_profit_coef_2, new_image)
+    print('W przypadku 2 współczynników otrzymujemy:{}'.format(dpcm_profit_coef_22))
     dpcm_profit_coef_33 = dpcm_profit_2(dpcm_profit_coef_3, new_image)
+    print('W przypadku 3 współczynników otrzymujemy:{}'.format(dpcm_profit_coef_33))
 
     plot_profit = plot_profit(dpcm_profit_coef_11,dpcm_profit_coef_22,dpcm_profit_coef_33)
 
