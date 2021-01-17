@@ -33,6 +33,12 @@ def create_rxx(coef,array_size):
     
     return Rxx
 
+def create_t(Rxx):
+    """
+    Znaleźć wektory własne i zbudować z nich macierz T korzystając z funkcji eig: [V,D]=eig(Rxx);
+    Rxx*V = V*D; T=V’; 
+    """
+    
 
 if __name__ == "__main__":
     image = read_pgm("lena256.pgm", byteorder='<')
@@ -46,3 +52,4 @@ if __name__ == "__main__":
     output_data = plt.acorr(new_image, maxlags=30,normed=True)
     auto_coef = output_data[1][30:]
     Rxx = create_rxx(auto_coef,30)
+    T_matrix = create_t(Rxx)

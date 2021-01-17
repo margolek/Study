@@ -94,8 +94,8 @@ def quantization(x):
         for j in range(1,len(x)):
             d = np.append(d,xq[j]-xq[j-1])
         a = np.histogram(d)
-        pro = a[0]/(np.sum(a[0]))
-        H = np.append(H, -np.sum(pro * np.log(pro)))
+        probability = a[0]/(np.sum(a[0]))
+        H = np.append(H, -np.sum(probability * np.log(probability)))
     print(H)
             
 
@@ -140,7 +140,7 @@ if __name__ == "__main__":
 
     plot_profit = plot_profit(dpcm_profit_coef_11,dpcm_profit_coef_22,dpcm_profit_coef_33)
 
-    #img_quant = quantization(new_image)
+    img_quant = quantization(new_image)
     
 
 
