@@ -3,7 +3,10 @@ import numpy as np
 from scipy import signal
 from scipy.fftpack import fft, dct,idct
 import matplotlib.pyplot as plt
-
+"""
+Ze względu na ograniczenie upla do przesyłania 2 plików, sprawozdanie z zadań 1 oraz 2
+umieściłem w miejscu sprawozdania poprzedniego
+"""
 
 def read_pgm(filename, byteorder='>'):
     """
