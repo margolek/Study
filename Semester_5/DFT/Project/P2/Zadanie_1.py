@@ -101,16 +101,14 @@ def quantization(x):
         for i in np.arange(1,len(x)):
             d = np.append(d,xq[i]-xq[i-1])
         a = np.histogram(d)
-<<<<<<< Updated upstream:Semester_5/DFT/Project/P2/Zadanie_1.py
         probability = (a[0])/(np.sum(a[0]))
         H = np.append(H, -np.sum(probability * np.log2(probability)))
 
     plt.hist(d)
-=======
-        probability = a[0]/(np.sum(a[0]))
-        H = np.append(H, -np.sum(probability)/(np.log2()
+    probability = a[0]/(np.sum(a[0]))
+    H = np.append(H, -np.sum(probability)/(np.log2()
     print(H)
->>>>>>> Stashed changes:Semester_5/DFT/Project/P2/Task_1.py
+
             
 
 
