@@ -1,8 +1,14 @@
 import re
 import numpy as np
 from scipy import signal
+from scipy.fftpack import fft, dct
 import matplotlib.pyplot as plt
+
+
 def read_pgm(filename, byteorder='>'):
+    """
+    Wczytanie pliku przy użyciu wyrażeń regularnych
+    """
     with open(filename, 'rb') as f:
         buffer = f.read()
     try:
@@ -38,7 +44,34 @@ def create_t(Rxx):
     Znaleźć wektory własne i zbudować z nich macierz T korzystając z funkcji eig: [V,D]=eig(Rxx);
     Rxx*V = V*D; T=V’; 
     """
-    
+    D,V = np.linalg.eig(Rxx)
+    T = V.transpose()
+    return T
+
+def find_coef(x,T):
+    """
+    3)Wyznaczyć współczynniki transformacji sygnału względem T, DCT, FFT
+    4)Wyznaczyć GTC dla powyższych transformacji
+    W tym punkcie miałem problem z określeniem współczynników transformacji wzgledem T, ponieważ
+    nie wiem jak połączyć rozmiar macierzy T (30,30) z rozmiarem sygnału(256**2)
+    """
+    DCT_coef = dct(x)
+    print()
+    FFT_coef = fft(x)
+    Gtc_dct_den,Gtc_fft_den = 1,1
+    Gtc_dct_num = np.sum(np.var(DCT_coef)**2)/len(x)
+    Gtc_fft_num = np.sum(np.var(FFT_coef)**2)/len(x)
+    for n in np.arange(0,len(x)):
+        Gtc_dct_den = Gtc_dct_den*(var(Gtc_dct_coef[n]))
+        Gtc_fft_den = Gtc_fft_den*(var(Gtc_fft_coef[n]))
+    Gtc_dct_den = (Gtc_dct_den)**(1/len(x))
+    Gtc_fft_den = (Gtc_fft_den)**(1/len(x))
+    Gtc_dct = Gtc_dct_num/Gtc_dct_num
+    Gtc_fft = Gtc_fft_num/Gtc_fft_den
+    print('Gtc dla DCT wynosi: {}, natomiast dla FFT: {}'.fomat(Gtc_dct,Gtc_fft))
+
+
+
 
 if __name__ == "__main__":
     image = read_pgm("lena256.pgm", byteorder='<')
@@ -53,3 +86,4 @@ if __name__ == "__main__":
     auto_coef = output_data[1][30:]
     Rxx = create_rxx(auto_coef,30)
     T_matrix = create_t(Rxx)
+    coef = find_coef(new_image,T_matrix)

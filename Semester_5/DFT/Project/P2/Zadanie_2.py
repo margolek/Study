@@ -1,4 +1,7 @@
 def huffman(freqtable):
+    """
+    Z racji, że w poprzednim puncie otrzymana czętość jest różna
+    od wartości z instrukcji to przyjąłem wartości domyślne"""
     from collections import defaultdict 
     from heapq import heappush, heappop, heapify
 
