@@ -2,6 +2,7 @@ import re
 import numpy as np
 import matplotlib.pyplot as plt
 def read_pgm(filename, byteorder='>'):
+    """Wczytanie pliku przy uzyciu wyrażeń refularnych"""
     with open(filename, 'rb') as f:
         buffer = f.read()
     try:
@@ -101,16 +102,8 @@ def quantization(x):
         for i in np.arange(1,len(x)):
             d = np.append(d,xq[i]-xq[i-1])
         a = np.histogram(d)
-        probability = (a[0])/(np.sum(a[0]))
-        H = np.append(H, -np.sum(probability * np.log2(probability)))
-
-    plt.hist(d)
-    probability = a[0]/(np.sum(a[0]))
-    H = np.append(H, -np.sum(probability)/(np.log2()
-    print(H)
-
-            
-
+        #probability = (a[0])/(np.sum(a[0]))
+        #H = np.append(H, -np.sum(probability * np.log2(probability)))
 
     PSNR = 10*np.log10(255**2/MSE)
     plt.figure(6)
@@ -120,12 +113,12 @@ def quantization(x):
     plt.plot(q,PSNR)
     plt.show()
 
-    plt.figure(7)
-    plt.grid(True)
-    plt.xlabel('Stopień kwantyzacji')
-    plt.ylabel('Entropia')
-    plt.plot(q,H)
-    plt.show()
+    #plt.figure(7)
+    #plt.grid(True)
+    #plt.xlabel('Stopień kwantyzacji')
+    #plt.ylabel('Entropia')
+    #plt.plot(q,H)
+    #plt.show()
 
     
 
@@ -157,11 +150,11 @@ if __name__ == "__main__":
     print('W przypadku 3 współczynników otrzymujemy:{}'.format(dpcm_profit_coef_3))
     
     dpcm_profit_coef_11 = dpcm_profit_2(dpcm_profit_coef_1, new_image)
-    print('W przypadku 1 współczynnika otrzymujemy:{}'.format(dpcm_profit_coef_11))
+    print('W przypadku 1 współczynnika otrzymujemy: G={}'.format(dpcm_profit_coef_11))
     dpcm_profit_coef_22 = dpcm_profit_2(dpcm_profit_coef_2, new_image)
-    print('W przypadku 2 współczynników otrzymujemy:{}'.format(dpcm_profit_coef_22))
+    print('W przypadku 2 współczynników otrzymujemy: G={}'.format(dpcm_profit_coef_22))
     dpcm_profit_coef_33 = dpcm_profit_2(dpcm_profit_coef_3, new_image)
-    print('W przypadku 3 współczynników otrzymujemy:{}'.format(dpcm_profit_coef_33))
+    print('W przypadku 3 współczynników otrzymujemy: G={}'.format(dpcm_profit_coef_33))
 
     plot_profit = plot_profit(dpcm_profit_coef_11,dpcm_profit_coef_22,dpcm_profit_coef_33)
 

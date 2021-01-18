@@ -53,22 +53,12 @@ def find_coef(x,T):
     3)Wyznaczyć współczynniki transformacji sygnału względem T, DCT, FFT
     4)Wyznaczyć GTC dla powyższych transformacji
     W tym punkcie miałem problem z określeniem współczynników transformacji wzgledem T, ponieważ
-    nie wiem jak połączyć rozmiar macierzy T (30,30) z rozmiarem sygnału(256**2)
+    nie wiem jak połączyć rozmiar macierzy T (30,30) z rozmiarem sygnału(256**2).
+    Napotkałem również kłopoty z implementacją Gtc ponieważ, nie mogę wysnioskować ze schematu
+    o wariancje których sygnałów potrzebujemy.
     """
     DCT_coef = dct(x)
-    print()
     FFT_coef = fft(x)
-    Gtc_dct_den,Gtc_fft_den = 1,1
-    Gtc_dct_num = np.sum(np.var(DCT_coef)**2)/len(x)
-    Gtc_fft_num = np.sum(np.var(FFT_coef)**2)/len(x)
-    for n in np.arange(0,len(x)):
-        Gtc_dct_den = Gtc_dct_den*(var(Gtc_dct_coef[n]))
-        Gtc_fft_den = Gtc_fft_den*(var(Gtc_fft_coef[n]))
-    Gtc_dct_den = (Gtc_dct_den)**(1/len(x))
-    Gtc_fft_den = (Gtc_fft_den)**(1/len(x))
-    Gtc_dct = Gtc_dct_num/Gtc_dct_num
-    Gtc_fft = Gtc_fft_num/Gtc_fft_den
-    print('Gtc dla DCT wynosi: {}, natomiast dla FFT: {}'.fomat(Gtc_dct,Gtc_fft))
 
 
 
@@ -79,11 +69,10 @@ if __name__ == "__main__":
     plt.figure(1)
     plt.imshow(image, plt.cm.gray)
     plt.show()
-
     new_image = image.flatten('F') - np.mean(image.flatten('F'))
-
     output_data = plt.acorr(new_image, maxlags=30,normed=True)
     auto_coef = output_data[1][30:]
     Rxx = create_rxx(auto_coef,30)
+    print(Rxx)
     T_matrix = create_t(Rxx)
     coef = find_coef(new_image,T_matrix)
