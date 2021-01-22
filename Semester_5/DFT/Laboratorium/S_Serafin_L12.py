@@ -32,6 +32,7 @@ def Z2(hn,N):
 	plt.grid(True)
 	plt.plot(w,np.abs(H),label='Rectangle')
 	plt.plot(w,np.abs(H_hamm),label='Hamming')
+	plt.plot(w,np.abs(hn_hamm),label='Hamming2')
 	plt.legend()
 	plt.show()
 
@@ -112,8 +113,8 @@ def Z5():
 
 
 if __name__ == '__main__':
-	#hn = Z1(15)
-	#ampl_pha = Z2(hn,15)
+	hn = Z1(15)
+	ampl_pha = Z2(hn,15)
 	#Z3()
 	signal = Z4()
 	#phase_modulation = Z5()

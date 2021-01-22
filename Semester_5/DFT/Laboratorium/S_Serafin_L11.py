@@ -16,7 +16,7 @@ def Z1():
 	plt.ylabel('$G(\omega)$')
 	plt.legend()
 	plt.show()
-Z1()
+#Z1()
 def Z2(w3,n):
 	#Krok 1
 	wc = 2*np.tan(w3/2)
@@ -52,6 +52,8 @@ def Z2(w3,n):
 	#Krok 4
 	w,h = signal.freqz_zpk([-1,-1,-1], poles_digital, G0)
 	fig = plt.figure(4)
+	print(np.where(np.isclose(w, 2.50959257)))
+	print(abs(h)[409])
 	plt.title('Digital filter frequency response')
 	plt.plot(w, (abs(h)), 'b')
 	plt.xlabel('Frequency [rad/s]')
