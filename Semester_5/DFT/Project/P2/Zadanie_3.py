@@ -73,6 +73,6 @@ if __name__ == "__main__":
     output_data = plt.acorr(new_image, maxlags=30,normed=True)
     auto_coef = output_data[1][30:]
     Rxx = create_rxx(auto_coef,30)
+    print(Rxx)
     T_matrix = create_t(Rxx)
-    print(T_matrix)
     coef = find_coef(new_image,T_matrix)
