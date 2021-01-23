@@ -32,7 +32,6 @@ def Z2(hn,N):
 	plt.grid(True)
 	plt.plot(w,np.abs(H),label='Rectangle')
 	plt.plot(w,np.abs(H_hamm),label='Hamming')
-	plt.plot(w,np.abs(hn_hamm),label='Hamming2')
 	plt.legend()
 	plt.show()
 
