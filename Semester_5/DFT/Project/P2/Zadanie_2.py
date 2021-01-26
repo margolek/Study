@@ -26,5 +26,5 @@ def huffman(freqtable):
 
     return code
 
-freqtable = dict(A=10,B=10,C=15,D=20,E=45)
+freqtable = dict(A=0.1,B=0.1,C=0.45,D=0.2,E=0.15)
 print(sorted(huffman(freqtable).items()))

@@ -102,8 +102,9 @@ def quantization(x):
         for i in np.arange(1,len(x)):
             d = np.append(d,xq[i]-xq[i-1])
         a = np.histogram(d)
-        #probability = (a[0])/(np.sum(a[0]))
-        #H = np.append(H, -np.sum(probability * np.log2(probability)))
+        #probability = a[1]
+        #/(np.sum(a[1]))
+        #H =  np.append(H,-np.sum(probability * np.log2(probability)))
 
     PSNR = 10*np.log10(255**2/MSE)
     plt.figure(6)
@@ -114,11 +115,11 @@ def quantization(x):
     plt.show()
 
     #plt.figure(7)
-    #plt.grid(True)
+   # plt.grid(True)
     #plt.xlabel('Stopień kwantyzacji')
-    #plt.ylabel('Entropia')
+   # plt.ylabel('Entropia')
     #plt.plot(q,H)
-    #plt.show()
+   # plt.show()
 
     
 

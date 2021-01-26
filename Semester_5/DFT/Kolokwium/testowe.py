@@ -14,8 +14,8 @@ def freq_characteristic(a=[1,2,1,2],N=3):
 	okien, przy N=15.
 	"""
 	H = 0
-	#w = np.linspace(-np.pi,np.pi,1000)
-	w = np.pi/5
+	
+	w = np.linspace(0,np.pi,1000)
 	for n in np.arange(-N,1):
 		H = H+a[n+N]*np.exp(-1j*w*n)
 	#plt.figure(1)
@@ -31,5 +31,9 @@ def freq_characteristic(a=[1,2,1,2],N=3):
 freq_characteristic()
 
 system = ([1],[1,0.5],1/100)
-t,y = signal.dimpulse(system)
-print(np.abs(signal.dfreqresp(system,w=np.pi)[1]))
+w,h = signal.freqz([1],[0.5,1])
+#print(np.abs(h[1]))
+x = np.array([0.1, 0.1, 0.15, 0.15, 0.5])
+probability = (x)/(np.sum(x))
+H =  -np.sum(probability * np.log2(probability))
+print(H)
