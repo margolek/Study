@@ -3,11 +3,25 @@ from scipy import signal
 import matplotlib.pyplot as plt
 
 
-#print(np.convolve([1,2,3,0],[2,1,1,1]))
+#print(np.convolve([1,2,3,4],[1,3,1,2]))
 #print()
-#print(np.convolve([1,2,3],[1,2],'full'))
+#print(np.convolve([1,2,3,4],[1,3,1,2],'full'))
 
 
+def low_high_pass(wg_low=np.pi/5,wg_high=np.pi/8,N=7):
+	h_lp = np.array([])
+	h_hp = np.array([])
+	n = np.arange(-N,N+1,1)
+	for i in n:
+		if i == 0:
+			h_lp = np.append(h_lp,wg_low/np.pi)
+		else:
+			h_lp = np.append(h_lp,np.sin(wg_low*i)/(np.pi*i))
+
+	h_lp_hamm = np.blackman(2*N+1)*h_lp
+	print(np.sum(h_lp_hamm[:9]))
+
+low_high_pass()
 def freq_characteristic(a=[1,2,1,2],N=3):
 	"""
 	wyznaczyć ch-kę częstotliwościową filtrów z poprzedniego zadania dla różnych funkcji
@@ -36,4 +50,11 @@ w,h = signal.freqz([1],[0.5,1])
 x = np.array([0.1, 0.1, 0.15, 0.15, 0.5])
 probability = (x)/(np.sum(x))
 H =  -np.sum(probability * np.log2(probability))
+#print(H)
+#print(np.abs(2+1j)*2)
+N=7
+H = 0
+w = np.pi/8
+for n in range(-N,N+1,1):
+	H = H + hn[n+N]*np.exp(-1j*w*n)
 print(H)
