@@ -96,6 +96,7 @@ if __name__ == "__main__":
     dpcm_profit_coef_22 = dpcm_profit_2(dpcm_profit_coef_2, new_image)
     dpcm_profit_coef_33 = dpcm_profit_2(dpcm_profit_coef_3, new_image)
     img_quant = quantization(new_image)
+    print()
     
 
 
