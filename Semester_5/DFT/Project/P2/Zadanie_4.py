@@ -71,6 +71,7 @@ def create_blocks(x):
                             my_dict['blocks27.0'],my_dict['blocks28.0'],my_dict['blocks29.0'],
                             my_dict['blocks30.0'],my_dict['blocks31.0']),axis=0)
 
+
     new_blocks1 = np.concatenate((new_dict['new_blocks0.0'],new_dict['new_blocks1.0'],new_dict['new_blocks2.0'],
                             new_dict['new_blocks3.0'],new_dict['new_blocks4.0'],new_dict['new_blocks5.0'],
                             new_dict['new_blocks6.0'],new_dict['new_blocks7.0'],new_dict['new_blocks8.0'],
@@ -101,6 +102,7 @@ def create_blocks(x):
             window = x[r:r+windowsize_r,c:c+windowsize_c]
             window = dct(window,axis=1)
             window = dct(window,axis=0)
+            print(np.var(windowm,ddof=1))
             count = count + np.count_nonzero(window) #Rekwantyzacja uzyskanych współczynników dla stopnia kwantyzacji q = 32
             blocks.append(window)
     print('Procent współczynników niezerowych dla transformaci DCT wzdłuż wierszy i kolumn wynowi: {0:0.2f}%'.format(count/(256**2)*100))

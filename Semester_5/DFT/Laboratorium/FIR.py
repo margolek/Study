@@ -9,7 +9,7 @@ def filtruj(x=[1,2,3],h=[1,1,1,1]):
 	"""
 	filtered_signal = signal.convolve(x,h,mode='full')
 	print(filtered_signal)	#len(filtered) == len(signal)
-def low_high_pass(wg_low=np.pi/8,wg_high=np.pi/8,N=7):
+def low_high_pass(wg_low=np.pi/8,wg_high=np.pi/6,N=7):
 	h_lp = np.array([])
 	h_hp = np.array([])
 	n = np.arange(-N,N+1,1)
@@ -21,9 +21,8 @@ def low_high_pass(wg_low=np.pi/8,wg_high=np.pi/8,N=7):
 			h_lp = np.append(h_lp,np.sin(wg_low*i)/(np.pi*i))
 			h_hp = np.append(h_hp,-np.sin(wg_high*i)/(np.pi*i))
 
-	h_lp_hamm = np.hamming(2*N+1)*h_lp
-	h_lp_blackam = np.blackman(2*N+1)*h_lp
-	print(np.sum(h_lp_blackam[:9]))
+	h_hp_blackam = np.blackman(2*N+1)*h_hp
+	print(f'blackamn wynosi{np.sum(h_hp_blackam[:9])}')
 	h_hp_hamm = np.hamming(2*N+1)*h_hp
 	plt.figure(1)
 	plt.title('Low pass')

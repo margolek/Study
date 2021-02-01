@@ -6,7 +6,8 @@ import matplotlib.pyplot as plt
 #print(np.convolve([1,2,3,4],[1,3,1,2]))
 #print()
 #print(np.convolve([1,2,3,4],[1,3,1,2],'full'))
-
+energia = 2*np.abs(1)**2+2*np.abs(0+3j)**2+2*np.abs(2)**2+2*np.abs(0+5j)**2+2*np.abs(6)**2
+print(energia)
 print()
 def low_high_pass(wg_low=np.pi/5,wg_high=np.pi/8,N=7):
 	h_lp = np.array([])

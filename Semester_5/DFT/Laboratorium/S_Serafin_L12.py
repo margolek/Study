@@ -14,12 +14,14 @@ def Z1(N):
 	plt.grid(True)
 	plt.stem(range(-N,N+1,1),hn)
 	plt.show()
+	hn = np.blackman(2*N+1)*hn
 	return hn
 
 def Z2(hn,N):
 	H = 0
 	H_hamm = 0
 	w = np.linspace(-np.pi, np.pi,500)
+	w = np.pi/8
 	for n in range(-N,N+1,1):
 		H = H + hn[n+N]*np.exp(-1j*w*n)
 	hn_hamm = np.hamming(2*N+1)*hn
@@ -32,7 +34,7 @@ def Z2(hn,N):
 	plt.grid(True)
 	plt.plot(w,np.abs(H),label='Rectangle')
 	print(w)
-	print(np.abs(H))
+	print(H)
 	plt.plot(w,np.abs(H_hamm),label='Hamming')
 	plt.legend()
 	plt.show()

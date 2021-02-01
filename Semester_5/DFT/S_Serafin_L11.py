@@ -6,7 +6,7 @@ def Z1():
 
 	wc = 25
 	w = np.linspace(0,100,1000)
-	n = [2,4,8]
+	n = [3,4,8]
 	for i in n:
 		Gw = 1/np.sqrt(1+((1j*w)/(1j*wc))**(2*i))
 		plt.figure(1)
