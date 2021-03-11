@@ -1,3 +1,12 @@
+%% Pierwszy program Mis
+% Generacja liczb o rozkladzie normalnym
+%
+%Autor: S.Serafin
+%Data modyfikacji: 3.11.2021
+
+%%Głowna czesc programu
+clear all; close all; clc;
+
 N = 20000;
 myData = randn(1,N);
 meanVal = mean(myData)
