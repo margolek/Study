@@ -14,7 +14,7 @@ def plot_default():
 	plt.tight_layout()
 	return my_data
 
-def predict(V=0.09,z=26,D=0.12,Tp=0.032,tau=0.1,tr=420):
+def predict(V=0.08,z=26,D=0.067,Tp=0.032,tau=0.1,tr=420):
 	T = []
 	t = np.arange(1,tr+1,tau)
 	for n in t:
